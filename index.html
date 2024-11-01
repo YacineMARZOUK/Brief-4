@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>To do list</title>
+</head>
+
+<body>
+  <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-4">
+      <div style="height: 90px;">
+        <span class="flex justify-center items-center self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          Your To do list
+        </span>
+      </div>
+    </div>
+    <div class="w-full font-bold flex justify-center items-center" id="navbar-default" style="height: 50px;">
+      <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li><a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded dark:text-white">Board</a></li>
+        <li><a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-blue-700 dark:text-white">Team</a></li>
+        <li><a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-blue-700 dark:text-white">Activity</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="flex justify-center space-x-2.5 mt-4" style="height: 50px;">
+    <p class="font-bold text-xl self-center">Add your task</p>
+    <button id="popup" class="border-gray-200 text-white rounded" style="width: 35px;">
+      <img src="./img/ajouter.png" alt="">
+    </button>
+  </div>
+
+  <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div class="relative bg-white rounded-lg shadow-lg p-6 w-96">
+      <button id="closeBtn" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">✕</button>
+      <h3 class="text-xl font-bold mb-4">Add New Task</h3>
+      <label for="Name of Task">Task name</label>
+      <input type="text" name="Name of Task" id="name" placeholder="Type Task Name" class="w-full mb-4 p-2 border rounded">
+      <label for="description">Task Description</label>
+      <input type="text" name="description" id="description" placeholder="Type Task description" class="w-full mb-4 p-2 border rounded">
+      <label for="priority">Choose a priority:</label>
+      <select name="priority" id="priority" class="w-full mb-4 p-2 border rounded">
+        <option value="select priority">Select a priority</option>
+        <option value="p1">P1</option>
+        <option value="p2">P2</option>
+        <option value="p3">P3</option>
+      </select>
+      <label for="priority">Choose a status:</label>
+      <select name="status" id="status" class="w-full mb-4 p-2 border rounded">
+        <option value="select priority">Select a status</option>
+        <option value="todo">To do</option>
+        <option value="doing">Doing</option>
+        <option value="done">Done</option>
+      </select> 
+      <label for="date">Due date :</label>
+      <input id="date" class="mb-3 bor" type="date"><br>
+      <button type="submit" id="submitModal" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">Add</button>
+    </div>
+  </div>
+  <div class=" grid grid-cols-1 md:grid-cols-3  gap-[20px] text-center flex items-center mt-20   "
+  style="height: 50px; ">
+  <div
+    class=" border border-2 border-teal-950 rounded bg-gradient-to-r from-cyan-500 to-blue-800 shadow-lg shadow-indigo-500/80" id="todo">
+    <h2 class="font-bold text-xl">To do</h2>
+  </div>
+  <div
+    class=" border border-2 border-teal-950 rounded bg-gradient-to-r from-cyan-500 to-blue-800 shadow-lg shadow-indigo-500/80" id="doing">
+    <h2 class="font-bold text-xl">Doing</h2>
+  </div>
+  <div
+    class=" border border-2 border-teal-950 rounded bg-gradient-to-r from-cyan-500 to-blue-800 shadow-lg shadow-indigo-500/80" id="done">
+    <h2 class="font-bold text-xl">done</h2>
+  </div>
+
+</div>
+
+  <script>
+    const showBtn = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+    const closeBtn = document.getElementById("closeBtn");
+    const submitModal = document.getElementById("submitModal")
+
+    showBtn.addEventListener("click", function(event) {
+     
+      overlay.classList.remove("hidden");
+
+    });
+    submitModal.addEventListener("click",function(event){
+      event.preventDefault();
+      const nom=document.getElementById('name').value;
+    const description=document.getElementById('description').value;
+    const priority=document.getElementById('priority').value;
+    const status=document.getElementById('status').value;
+    const date=document.getElementById('date').value;
+    const todo = document.getElementById("todo")
+    const doing = document.getElementById("doing")
+    const done = document.getElementById("done")
+      if(nom && status && priority){
+        if(status == "todo"){   
+          const div = document.createElement("div");
+          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
+          todo.appendChild(div)
+        }
+        if(status == "doing"){   
+          const div = document.createElement("div");
+          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
+          doing.appendChild(div)
+        }
+        if(status == "done"){   
+          const div = document.createElement("div");
+          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
+          done.appendChild(div)
+        }
+      }
+      overlay.classList.remove("hidden");
+
+    })
+    closeBtn.addEventListener("click", function() {
+      overlay.classList.add("hidden");
+    });
+
+    overlay.addEventListener("click", function(e) {
+      if (e.target === overlay) {
+        overlay.classList.add("hidden");
+      }
+    });
+    
+    document.getElementById("overlay").addEventListener('click',function(event){
+      event.preventDefault();
+
+    })
+
+   
+
+
+    
+  </script>
+</body>
+
+</html>
