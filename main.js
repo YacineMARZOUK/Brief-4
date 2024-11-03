@@ -20,6 +20,7 @@ submitModal.addEventListener("click", function () {
     const status = document.getElementById('status').value;
     const date = document.getElementById('date').value;
 
+    
     if (nom && status && priority) {
         const today = new Date();
         console.log(today)
