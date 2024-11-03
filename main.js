@@ -22,8 +22,7 @@ submitModal.addEventListener("click", function () {
 
     if (nom && status && priority) {
         const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
+        console.log(today)
         const selectedDate = new Date(date);
         
         if (selectedDate < today) {
@@ -92,4 +91,5 @@ function editTask(taskElement) {
 
     const currentStatus = taskElement.parentNode.id;
     document.getElementById('status').value = currentStatus;
+    
 }
