@@ -45,7 +45,7 @@
       <label for="priority">Choose a priority:</label>
       <select name="priority" id="priority" class="w-full mb-4 p-2 border rounded">
         <option value="select priority">Select a priority</option>
-        <option value="p1">P1</option>
+        <option value="p1" >P1</option>
         <option value="p2">P2</option>
         <option value="p3">P3</option>
       </select>
@@ -69,6 +69,7 @@
   </div>
   <div
     class=" border border-2 border-teal-950 rounded bg-gradient-to-r from-cyan-500 to-blue-800 shadow-lg shadow-indigo-500/80" id="doing">
+      
     <h2 class="font-bold text-xl">Doing</h2>
   </div>
   <div
@@ -77,68 +78,8 @@
   </div>
 
 </div>
+<script src="main.js"></script>
 
-  <script>
-    const showBtn = document.getElementById("popup");
-    const overlay = document.getElementById("overlay");
-    const closeBtn = document.getElementById("closeBtn");
-    const submitModal = document.getElementById("submitModal")
-
-    showBtn.addEventListener("click", function(event) {
-     
-      overlay.classList.remove("hidden");
-
-    });
-    submitModal.addEventListener("click",function(event){
-      event.preventDefault();
-      const nom=document.getElementById('name').value;
-    const description=document.getElementById('description').value;
-    const priority=document.getElementById('priority').value;
-    const status=document.getElementById('status').value;
-    const date=document.getElementById('date').value;
-    const todo = document.getElementById("todo")
-    const doing = document.getElementById("doing")
-    const done = document.getElementById("done")
-      if(nom && status && priority){
-        if(status == "todo"){   
-          const div = document.createElement("div");
-          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
-          todo.appendChild(div)
-        }
-        if(status == "doing"){   
-          const div = document.createElement("div");
-          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
-          doing.appendChild(div)
-        }
-        if(status == "done"){   
-          const div = document.createElement("div");
-          div.innerHTML = `<h1 class="">${nom}</h1> <p>${date}</p> <p>${priority}</p>`
-          done.appendChild(div)
-        }
-      }
-      overlay.classList.remove("hidden");
-
-    })
-    closeBtn.addEventListener("click", function() {
-      overlay.classList.add("hidden");
-    });
-
-    overlay.addEventListener("click", function(e) {
-      if (e.target === overlay) {
-        overlay.classList.add("hidden");
-      }
-    });
-    
-    document.getElementById("overlay").addEventListener('click',function(event){
-      event.preventDefault();
-
-    })
-
-   
-
-
-    
-  </script>
 </body>
 
 </html>
