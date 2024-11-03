@@ -30,11 +30,22 @@ submitModal.addEventListener("click", function () {
             alert("The due date cannot be in the past!");
             return; 
         }
+        let priorityClass = ""; 
+
+        
+        if (priority === "p1") {
+            priorityClass = "border-l-4 border-red-700";
+        } else if (priority === "p2") {
+            priorityClass = "border-l-orange-500  ";
+        } else if (priority === "p3") {
+            priorityClass = "border-l m-green-700";
+        }
 
         if (editingTask) {
             editingTask.querySelector(".task-name").textContent = nom;
             editingTask.querySelector(".task-date").textContent = date;
             editingTask.querySelector(".task-priority").textContent = priority;
+            editingTask.className = `flex justify-evenly ${priorityClass}`;
             
             const currentStatus = editingTask.parentNode.id;
 
@@ -46,7 +57,7 @@ submitModal.addEventListener("click", function () {
             editingTask = null; 
         } else {
             const taskElement = document.createElement("div");
-            taskElement.className = "flex justify-evenly";
+            taskElement.className = `flex justify-evenly ${priorityClass}`;
             taskElement.innerHTML = `
             <h1 class="task-name">${nom}</h1>
             <p class="task-date">${date}</p>
