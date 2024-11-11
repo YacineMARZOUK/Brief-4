@@ -31,7 +31,7 @@ submitModal.addEventListener("click", function () {
             return; 
         }
         let priorityClass = ""; 
-
+       if (priority === "p1" && "p2" && "p3")
         
         if (priority === "p1") {
             priorityClass = "border-l-4 border-red-700";
@@ -40,6 +40,7 @@ submitModal.addEventListener("click", function () {
         } else if (priority === "p3") {
             priorityClass = "border-l m-green-700";
         }
+    
 
         if (editingTask) {
             editingTask.querySelector(".task-name").textContent = nom;
